@@ -210,7 +210,7 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 						{'name' : 'Score Asa', 'id' : 'asa_score' },
 						{'name' : 'Urgence', 'id' : 'urgence' },
 						{'name' : 'Sexe', 'id' : 'sexe' },
-						{'name' : 'NMAE_Score', 'id' : 'NMAE_Score' }
+						{'name' : 'Neg_MAE_Score', 'id' : 'NMAE_Score' }
 					],
 					data = rs.to_dict('records'),
 					fill_width = False,
@@ -243,7 +243,7 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 					dcc.RadioItems(
 						id = 'variable_sexe',
 						options = [
-							{'label':'Femme','value':0},
+							{'label':'Femme','value':2},
 							{'label':'Homme','value':1}
 						],
 						value = None,
@@ -282,8 +282,10 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 				
 			html.Div(className= 'eight columns div-for-charts bg-grey',id='result_ml', title = "Random Forest Regressor prediction", 
 		        	style={'backgroundColor':'#000102'}, children= [
+		        	html.Br(),
+					html.Br(),
 		        	html.Label("Random Forest Regressor prediction", 
-					style = {'textAlign':'center','color':'#FDFDFD','fontWeight': 'bold'}),
+					style = {'textAlign':'center', 'backgroundColor': '#1D1E1ECC','color':'#FCFCFC','fontWeight': 'bold'}),
 
 		        	]),
 		]),
@@ -458,7 +460,7 @@ def get_ml_prediction(service_ml_value, variable_sexe_value=None, variable_urg_v
 		# open the pickle file with model
 		filename = "./save_model/" + str(service_ml_value) + ".sav"
 		rfr = pickle.load(open(filename, 'rb'))
-		res_t = "Le temps estimé en réanimation par Random Forest est de {} jours".format(np.round(rfr.predict(sample),2))
+		res_t = "Le temps estimé en réanimation par Random Forest est de {0:.2f} jours".format(rfr.predict(sample)[0])
 	else:
 		res_t = ""
 	return res_t
