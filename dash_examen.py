@@ -69,7 +69,7 @@ app= dash.Dash("Dashboard", external_stylesheets=external_stylesheets)
 
 colors = {
     'background': 'rgb(30, 30, 30)',#'#160800',
-    'text': '#ACBEC087'
+    'text': '#FCFCFC' #'#ACBEC087'
     }
 
 
@@ -199,7 +199,7 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 					style={'textAlign': 'center', 'backgroundColor': '#1E1E1E','color':'#1D1E1ECC'},
 					placeholder = "Selection des services"
 				),
-				html.Label("Importance des variables spour la prédiction de la durée en Réanimation", 
+				html.Label("Importance des variables pour la prédiction de la durée en Réanimation", 
 					style = {'textAlign':'center','color':'#FDFDFD','fontWeight': 'bold'}),
 				dt.DataTable(
 					id='table_rs',
@@ -220,7 +220,9 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 						'fontWeight': 'bold',
 						'border': '1px solid black' 
 					},
-				)
+				),
+				html.Br(),
+				html.Br()
 		]),
 		html.Div(className='eight columns div-for-charts bg-grey', style={'backgroundColor':'#000102'}, 
 			children=[
@@ -231,6 +233,9 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 			children=[
 				html.Div(className='four columns div-user-controls', 
 				children=[
+		        	html.Label("Prédire le temps en service de réanimation", 
+						style = {'textAlign':'center', 'backgroundColor': '#1D1E1ECC','color':'#FCFCFC','fontWeight': 'bold'}),
+
 					dcc.Dropdown(
 						id = "service_ml",
 						options=[{'label': i, 'value': i} for i in data['service'].unique()],
@@ -239,7 +244,7 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 						style={'textAlign': 'center', 'backgroundColor': '#1E1E1E','color':'#1D1E1ECC'},
 						placeholder = "Selection des services"
 					),
-					html.P('''Selection de la variable sexe: ''', style = {'textAlign':'left','color':'#FDFDFD','fontWeight': 'bold'}),
+					html.P('''Selection de la variable sexe: ''', style = {'textAlign':'left','color':'#FCFCFC','fontWeight': 'bold'}),
 					dcc.RadioItems(
 						id = 'variable_sexe',
 						options = [
@@ -249,7 +254,7 @@ app.layout = html.Div(style= { 'backgroundColor': colors['background'] },
 						value = None,
 						labelStyle={'display': 'inline-block'}
 					),
-					html.P('''Selection de la variable Urgence: ''', style = {'textAlign':'left','color':'#FDFDFD','fontWeight': 'bold'}),
+					html.P('''Selection de la variable Urgence: ''', style = {'textAlign':'left','color':'#FCFCFC','fontWeight': 'bold'}),
 					dcc.RadioItems(
 						id = 'variable_urg',
 						options = [
